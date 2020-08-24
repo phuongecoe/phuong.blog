@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import { Image } from 'semantic-ui-react';
 import * as _ from 'lodash';
 
-export default function Home({photos}) {
+export default function Home({photos, baseUrl}) {
     const [list, setList] = useState(photos);
 
     useEffect(() => {
@@ -12,6 +12,7 @@ export default function Home({photos}) {
             getList();
         }
 
+        console.info('baseUrl', baseUrl);
 
     }, []);
 
@@ -46,7 +47,8 @@ export async function getServerSideProps() {
 
     return {
         props: {
-            photos: result
+            photos: result,
+            baseUrl
         }
     }
 
