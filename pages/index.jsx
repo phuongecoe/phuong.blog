@@ -35,6 +35,10 @@ export default function Home({photos, VERCEL_URL}) {
 
 export async function getStaticProps() {
     let baseUrl = `http://localhost:3000`;
+    if(process.env.VERCEL_URL) {
+        baseUrl = process.env.VERCEL_URL;
+    }
+
     let result = await fetch(`${baseUrl}/api/photos/randoms`)
         .then(data => data.json())
         .catch(e => {
