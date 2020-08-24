@@ -32,7 +32,7 @@ export default function Home({photos}) {
 }
 
 export async function getStaticProps() {
-    let baseUrl = process.env.API_ENDPOINT || process.env.VERCEL_URL;
+    let baseUrl = process.env.VERCEL_URL;
     let result = await fetch(`${baseUrl}/api/photos/randoms`)
         .then(data => data.json());
 
