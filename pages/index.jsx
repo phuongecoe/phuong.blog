@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import { Image } from 'semantic-ui-react';
 import * as _ from 'lodash';
 
-export default function Home({photos, VERCEL_URL}) {
+export default function Home({photos}) {
     const [list, setList] = useState(photos);
 
     useEffect(() => {
@@ -12,7 +12,6 @@ export default function Home({photos, VERCEL_URL}) {
             getList();
         }
 
-        console.info('VERCEL_URL', VERCEL_URL);
 
     }, []);
 
@@ -33,7 +32,7 @@ export default function Home({photos, VERCEL_URL}) {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     let baseUrl = `http://localhost:3000`;
     if(process.env.VERCEL_URL) {
         baseUrl = process.env.VERCEL_URL;
@@ -47,8 +46,7 @@ export async function getStaticProps() {
 
     return {
         props: {
-            photos: result,
-            VERCEL_URL: process.env.VERCEL_URL
+            photos: result
         }
     }
 
