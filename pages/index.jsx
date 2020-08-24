@@ -34,11 +34,8 @@ export default function Home({photos, baseUrl}) {
 }
 
 export async function getServerSideProps() {
-    let baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL;
-    // if(process.env.VERCEL_URL) {
-    //     baseUrl = `https://${process.env.VERCEL_URL}`;
-    // }
-
+    let baseUrl = process.env.API_ENDPOINT;
+    
     let result = await fetch(`${baseUrl}/api/photos/randoms`)
         .then(data => data.json())
         .catch(e => {
