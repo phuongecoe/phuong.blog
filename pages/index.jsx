@@ -4,13 +4,15 @@ import React, {useEffect, useState} from "react";
 import { Image } from 'semantic-ui-react';
 import * as _ from 'lodash';
 
-export default function Home({photos}) {
+export default function Home({photos, VERCEL_URL}) {
     const [list, setList] = useState(photos);
 
     useEffect(() => {
         if(_.isEmpty(photos)) {
             getList();
         }
+
+        console.info('VERCEL_URL', VERCEL_URL);
 
     }, []);
 
@@ -32,13 +34,14 @@ export default function Home({photos}) {
 }
 
 export async function getStaticProps() {
-    let baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL;
+    let baseUrl = `http://localhost:3000`;
     let result = await fetch(`${baseUrl}/api/photos/randoms`)
         .then(data => data.json());
 
     return {
         props: {
             photos: result,
+            VERCEL_URL: process.env.VERCEL_URL
         }
     }
 
