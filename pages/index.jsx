@@ -34,10 +34,10 @@ export default function Home({photos, baseUrl}) {
 }
 
 export async function getServerSideProps() {
-    let baseUrl = `http://localhost:3000`;
-    if(process.env.VERCEL_URL) {
-        baseUrl = `https://${process.env.VERCEL_URL}`;
-    }
+    let baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL;
+    // if(process.env.VERCEL_URL) {
+    //     baseUrl = `https://${process.env.VERCEL_URL}`;
+    // }
 
     let result = await fetch(`${baseUrl}/api/photos/randoms`)
         .then(data => data.json())
